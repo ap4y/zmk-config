@@ -18,6 +18,12 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+        bspc_del: backspace_delete {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BACKSPACE>, <&kp DELETE>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        }; 
     };
 
     keymap {
@@ -26,31 +32,30 @@
         default_layer {
             bindings = <
              &kp Q        &kp D       &kp R       &kp W      &kp B      &kp J      &kp F      &kp U       &kp P        &kp SEMI
-             &hm LSHFT A  &hm LCTRL S &hm LALT H  &kp T      &kp G      &kp Y      &kp N      &hm RALT E  &hm RCTRL O  &hm RSHFT I
+             &hm LSHFT A  &kp S       &kp H       &kp T      &kp G      &kp Y      &kp N      &kp E      &kp O        &hm RSHFT I
              &kp Z        &kp X       &kp M       &kp C      &kp V      &kp K      &kp L      &kp COMMA   &kp DOT      &kp SLASH
-                                      &kp BSPC    &kp SPACE  &lt 1 ESC  &mo 1      &kp RET    &kp TAB
+                                      &kp BSPC    &kp SPACE  &lt 1 ESC  &mo 2      &hm LCTRL RET &hm LGUI TAB
+            >;
+        };
+         
+        nav_layer {
+            label = "Nav";
+            bindings = <            
+             &kp ESC      &bspc_del   &kp LG(R)   &kp LG(W)  &none      &none      &kp HOME   &kp UP       &kp END      &none
+             &kp LG(A)    &kp LG(S)   &kp LG(H)   &kp LG(T)  &none      &none      &kp LEFT   &kp DOWN    &kp RIGHT    &none
+             &kp LG(Z)    &kp LG(X)   &none       &none      &none      &none      &bt BT_SEL 0      &bt BT_SEL 1       &bt BT_SEL 3        &bt BT_CLR             
+                                      &trans      &trans     &trans     &kp LSHFT  &kp LG(RET) &kp LG(TAB)
             >;
         };
 
         ns_layer {
-            label = "NumSym";
+            label = "Sym";
             bindings = <
-             &kp EXCL     &kp AT      &kp LBRC    &kp RBRC   &kp PIPE   &kp UNDER  &kp MINUS  &kp APOS    &kp EQUAL    &kp STAR
+             &kp EXCL     &kp AT      &kp LBRC    &kp RBRC   &kp PIPE   &kp STAR   &kp UNDER  &kp APOS    &kp EQUAL    &kp GRAVE
              &kp N1       &kp N2      &kp N3      &kp N4     &kp N5     &kp N6     &kp N7     &kp N8      &kp N9       &kp N0
-             &kp LPAR     &kp RPAR    &kp LBKT    &kp RBKT   &kp PRCNT  &kp CARET  &kp AMPS   &kp DQT     &kp PLUS     &kp BSLH
-                                      &kp TILDE   &kp GRAVE  &mo 2      &mo 2      &kp HASH   &kp DLLR
+             &kp LPAR     &kp RPAR    &kp LBKT    &kp RBKT   &kp HASH   &kp DLLR   &kp MINUS  &kp DQT     &kp PLUS     &kp BSLH
+                                      &trans      &trans     &kp LSHFT  &trans     &kp LCTRL  &kp LALT
             >;            
         };
-
-        nav_layer {
-            label = "Nav";
-            bindings = <            
-             &kp Q        &none       &kp R       &none      &none      &none      &kp F      &kp U       &kp P        &none
-             &kp A        &kp S       &none       &none      &none      &none      &kp LEFT   &kp DOWN    &kp UP       &kp RIGHT
-             &none        &none       &none       &none      &none      &none      &none      &none       &none        &none             
-                                      &trans      &trans     &trans     &trans     &none      &bt BT_CLR
-            >;
-        };
-
     };
 };
